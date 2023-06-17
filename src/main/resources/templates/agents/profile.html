@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<title>Profile</title>
+<!-- Head (all meta link scripts go here ) START -->
+<div th:replace="~{fragments/header :: header}"></div>
+<!-- Head (all meta link scripts go here ) END -->
+<!-- ADD THE CLASS sidedar-collapse TO HIDE THE SIDEBAR PRIOR TO LOADING THE SITE -->
+
+
+<body class="hold-transition skin-blue sidebar-mini">
+<style>
+</style>
+<!-- Site wrapper START-->
+<div class="wrapper">
+    <!-- TOP Menu (all meta link scripts go here ) START -->
+    <div th:replace="~{fragments/top-menu :: top-menu}"></div>
+    <!-- TOP Menu (all meta link scripts go here ) END -->
+    <!-- Left side column. contains the sidebar START -->
+    <div th:replace="~{fragments/left-menu-panel :: left-menu-panel}"></div>
+    <!-- Left side column. contains the sidebar END -->
+    <!-- Content Wrapper. Contains page content START -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) START-->
+        <!-- <div th:replace="~{fragments/maincontainheader :: maincontainheader"/>  TODO need to check 21-03-2020 -->
+        <!-- Content Header (Page header) END-->
+
+
+        <!--  ********  PLEASE DO NOT CHANGE ABOVE CODE ********* -->
+
+        <!-- Main content START  -->
+        <!--   ============ YOUR CODE WILL GO HERE =========== START -->
+        <!-- Content Header START -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Agent Profile</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Profile</a></li>
+                            <li class="breadcrumb-item active">Dashboard</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- Content Header END -->
+        <section class="content">
+            <div class="container-fluid">
+                <div sec:authorize="!hasAuthority('permission.agent.toto')">
+                    <div style="color: #ac2925; text-align: center">
+                        <h4>You don't have permission to this page.</h4>
+                    </div>
+                </div>
+                <div class="row" sec:authorize="hasAuthority('permission.agent.user')">
+                    <div class="col-12">
+                        <div class="box">
+                            <div class="box-header">
+                                <div class="alert alert-success" th:if="${successMessage != null}">
+                                    <strong>Success! </strong>
+                                    <div th:text="${successMessage}"/>
+                                </div>
+                                <div class="alert alert-warning" th:if="${warningMessage != null}">
+                                    <strong>Warning! </strong>
+                                    <div th:text="${warningMessage}"/>
+                                </div>
+                                <div class="alert alert-danger" th:if="${errorMessage != null}">
+                                    <strong>Failure! </strong>
+                                    <div th:text="${errorMessage}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Custom Card tabs (Charts with tabs)-->
+	            <div class="card">
+	              <div class="card-header">
+	                <h3 class="card-title">
+	                	<i class="fa fa-user"></i>
+	                  Profile
+	                </h3>
+	                <div class="card-tools">
+	                </div>
+	              </div><!-- /.card-header -->
+	              <div class="card-body">
+	                <div class="row">
+				          <div class="col-lg-3 col-12">
+				            <!-- small box -->
+				            <div class="small-box bg-info">
+				              <div class="inner">
+				                <h4><span th:text="${profile.agentName}" th:remove="tag"></span></h4>
+				
+				                <p>Agent Code    : <span th:text="${profile.agentCode}" th:remove="tag"></span></p>
+				                <p>Wallet Balance: <span th:text="${profile.walletBalance}" th:remove="tag"></span></p>
+				                <p>Bonus Balance : <span th:text="${profile.bonusBalance}" th:remove="tag"></span></p>
+				              </div>
+				              <div class="icon">
+				                <!--  -->
+				              </div>
+				              <a href="#" class="small-box-footer"><small><br></small> </a>
+				            </div>
+				          </div>
+				          
+				    </div>
+	              </div><!-- /.card-body -->
+	            </div>
+	            <!-- Custom Card tabs (Charts with tabs)-->
+	            <div class="card">
+	              <div class="card-header">
+	                <h3 class="card-title">
+	                	<i class="fa fa-diamond"></i>
+	                  Wallet
+	                </h3>
+	                <div class="card-tools">
+	                </div>
+	              </div><!-- /.card-header -->
+	              <div class="card-body">
+	                <div class="row">
+				          <div class="col-lg-3 col-6">
+				            <!-- small box -->
+				            <div class="small-box bg-success">
+				              <div class="inner">
+				                <h3><span th:text="${profile.walletBalance}" th:remove="tag"></span></h3>
+				
+				                <p>Wallet Balance</p>
+				              </div>
+				              <div class="icon">
+				                <!--  -->
+				              </div>
+				              <div class="small-box-footer">
+				              	<button class="btn btn-sm btn-success">Recharge</button> <button class="btn btn-sm btn-success">Withdraw</button>
+				              </div>
+				            </div>
+				          </div>
+				    </div>
+	              </div><!-- /.card-body -->
+	            </div>
+	            <!-- /.card -->
+                <!-- Custom Card tabs (Charts with tabs)-->
+	            <div class="card">
+	              <div class="card-header">
+	                <h3 class="card-title">
+	                	<i class="fa fa-diamond"></i>
+	                  Completed Tasks
+	                </h3>
+	                <div class="card-tools">
+	                </div>
+	              </div><!-- /.card-header -->
+	              <div class="card-body">
+	                <div class="row">
+				          <div class="col-lg-3 col-6">
+				            <!-- small box -->
+				            <div class="small-box bg-info">
+				              <div class="inner">
+				                <h3><span th:text="${profile.totalTask}" th:remove="tag"></span></h3>
+				
+				                <p>Tasks Completed</p>
+				              </div>
+				              <div class="icon">
+				                <!--  -->
+				              </div>
+				              <a href="#" class="small-box-footer"><br> </a>
+				            </div>
+				          </div>
+				          <div class="col-lg-3 col-6">
+				            <!-- small box -->
+				            <div class="small-box bg-success">
+				              <div class="inner">
+				                <h3><span th:text="${profile.totalEarning}" th:remove="tag"></span></h3>
+				
+				                <p>Earned</p>
+				              </div>
+				              <div class="icon">
+				                <!--  -->
+				              </div>
+				              <a href="#" class="small-box-footer"><br> </a>
+				            </div>
+				          </div>
+				    </div>
+	              </div><!-- /.card-body -->
+	            </div>
+	            <!-- /.card -->
+	            <!-- Custom Card tabs (Charts with tabs)-->
+	            <div class="card">
+	              <div class="card-header">
+	                <h3 class="card-title">
+	                	<i class="fa fa-diamond"></i>
+	                  Referral and Bonus
+	                </h3>
+	                <div class="card-tools">
+	                </div>
+	              </div><!-- /.card-header -->
+	              <div class="card-body">
+	                <div class="row">
+				          <div class="col-lg-3 col-6">
+				            <!-- small box -->
+				            <div class="small-box bg-info">
+				              <div class="inner">
+				                <h3><span th:text="${profile.totalReferals}" th:remove="tag"></span></h3>
+				
+				                <p>Total Referrals</p>
+				              </div>
+				              <div class="icon">
+				                
+				              </div>
+				              <a href="#" class="small-box-footer"><br> </a>
+				            </div>
+				          </div>
+				          <div class="col-lg-3 col-6">
+				            <!-- small box -->
+				            <div class="small-box bg-success">
+				              <div class="inner">
+				                <h3><span th:text="${profile.totalBonus}" th:remove="tag"></span></h3>
+				
+				                <p>Earned in Bonus</p>
+				              </div>
+				              <div class="icon">
+				                
+				              </div>
+				              <a href="#" class="small-box-footer"><br> </a>
+				            </div>
+				          </div>
+				          <div class="col-lg-3 col-6">
+				            <!-- small box -->
+				            <div class="small-box bg-success">
+				              <div class="inner">
+				                <h3><span th:text="${profile.paidOutBonus}" th:remove="tag"></span></h3>
+				
+				                <p>Bonus Paid Out</p>
+				              </div>
+				              <div class="icon">
+				                
+				              </div>
+				              <a href="#" class="small-box-footer"><br> </a>
+				            </div>
+				          </div>
+				          <div class="col-lg-3 col-6">
+				            <!-- small box -->
+				            <div class="small-box bg-success">
+				              <div class="inner">
+				                <h3><span th:text="${profile.bonusBalance}" th:remove="tag"></span></h3>
+				
+				                <p>Bonus Balance</p>
+				              </div>
+				              <div class="icon">
+				                
+				              </div>
+				              <div class="small-box-footer">
+				              	<div class="row">
+				              		<div class="col-6">
+				              			<button class="btn btn-sm btn-success">Withdraw</button>
+				              		</div>
+				              		<div class="col-6">
+				              			<button class="btn btn-sm btn-info">Transfer to Wallet</button>
+				              		</div>
+				              	</div>
+				              	 
+				              </div>
+				            </div>
+				          </div>
+				    </div>
+	              </div><!-- /.card-body -->
+	            </div>
+	            <!-- /.card -->
+	            <!-- Custom Card tabs (Charts with tabs)-->
+	            <div class="card">
+	              <div class="card-header">
+	                <h3 class="card-title">
+	                	<i class="fa fa-diamond"></i>
+	                  Bonus Breakdown
+	                </h3>
+	                <div class="card-tools">
+	                </div>
+	              </div><!-- /.card-header -->
+	              <div class="card-body">
+	                <div class="row">
+				          <div class="col-lg-3 col-6">
+				            <!-- small box -->
+				            <div class="small-box bg-info">
+				              <div class="inner">
+				                <p>Level 1 Referral Count: <span th:text="${profile.referalCount1}" th:remove="tag"></span></p>
+				
+				                <p>Level 1 Bounus: <span th:text="${profile.bonus1}" th:remove="tag"></span></p>
+				              </div>
+				              <div class="icon">
+				                
+				              </div>
+				              <a href="#" class="small-box-footer"><br> </a>
+				            </div>
+				          </div>
+				          <div class="col-lg-3 col-6">
+				            <!-- small box -->
+				            <div class="small-box bg-success">
+				              <div class="inner">
+				                 <p>Level 2 Referral Count: <span th:text="${profile.referalCount2}" th:remove="tag"></span></p>
+				
+				                <p>Level 2 Bounus: <span th:text="${profile.bonus2}" th:remove="tag"></span></p>
+				              </div>
+				              <div class="icon">
+				                
+				              </div>
+				              <a href="#" class="small-box-footer"><br> </a>
+				            </div>
+				          </div>
+				          <div class="col-lg-3 col-6">
+				            <!-- small box -->
+				            <div class="small-box bg-warning">
+				              <div class="inner">
+				                 <p>Level 3 Referral Count: <span th:text="${profile.referalCount3}" th:remove="tag"></span></p>
+				
+				                <p>Level 3 Bounus: <span th:text="${profile.bonus3}" th:remove="tag"></span></p>
+				              </div>
+				              <div class="icon">
+				                
+				              </div>
+				              <a href="#" class="small-box-footer"><br> </a>
+				            </div>
+				          </div>
+				    </div>
+	              </div><!-- /.card-body -->
+	            </div>
+	            <!-- /.card -->
+            </div>
+        </section>
+        <!--   ============ YOUR CODE WILL GO HERE =========== END-->
+        <!-- Main content END  -->
+
+
+        <!--  ********  PLEASE DO NOT CHANGE BELOW CODE ********* -->
+
+    </div>
+    <!-- Content Wrapper. Contains page content END -->
+
+    <!-- ===================##### Main contain goes here END ============================ -->
+
+    <!-- =============================================== -->
+    <!-- Footer START -->
+    <div th:replace="~{fragments/footer :: footer}"></div>
+    <!-- Footer END -->
+    <!-- Add the sidebar's background. This div must be placed immediately after the control sidebar -->
+    <div class="control-sidebar-bg"></div>
+</div>
+<!-- Site wrapper END -->
+<!-- common script START -->
+<div th:replace="~{fragments/common-scripts :: common-scripts}"></div>
+<!-- common script END -->
+<!-- DataTables -->
+<script th:src="@{/resources/js/jquery.dataTables-1.10.12.min.js}"></script>
+<script th:src="@{/resources/js/dataTables.bootstrap-1.10.12.min.js}"></script>
+<script th:src="@{/resources/js/bootstrap-dialog-1.35.4.min.js}"></script>
+<script th:src="@{/resources/js/dataTables.fixedHeader-3.1.3.min.js}"></script>
+<script th:src="@{/resources/js/dataTables.responsive-2.2.1.min.js}"></script>
+<script th:src="@{/resources/js/responsive.bootstrap-2.2.1.min.js}"></script>
+<script th:src="@{/resources/js/jquery.bootstrap-duallistbox.js}"></script>
+<script th:src="@{/resources/js/bootstrap-imageupload.js}"></script>
+
+<script th:inline="javascript">
+
+</script>
+
+<script type="text/javascript">
+var locationMap = new Map();
+$(document).ready(function() {
+	
+	
+    $("#search-box").keyup(function() {
+    	
+    	var header = $("meta[name=_csrf_header]").attr("content");
+    	var token =  $("meta[name=_csrf]").attr("content");
+    	var searchString = $(this).val();
+    	$.ajax({
+            type: "POST",
+            url: "/cms/internal/location/generic",
+            contentType: 'application/json',
+            data: JSON.stringify({
+            	key: searchString
+            }),
+            beforeSend: function(xhr, settings) {
+            	
+            	var loaderUrl = "#FFF url(/images/LoaderIcon.gif) no-repeat 165px";
+                $("#search-box").css("background", loaderUrl);
+                xhr.setRequestHeader(header, token);
+            },
+            success: function(result) {
+            	//console.log(result);
+            	var htmlResult = "";
+            	if(result.status.code == 200)
+            	{
+            		locationMap.clear();
+            		var listLocation = result.data.locations;
+            		var htmlUlStart = '<ul id="country-list" class="locationUl" >';
+            		var htmlItems = "";
+                	listLocation.forEach(function (location) {
+                	    var id = location.locationId;
+                	    var desc = location.shortDetails;
+                	    //console.log(desc);
+                	    htmlItems += '<li onClick="selectLocation('+id+')">'+desc+'</li>';
+                	    
+                	    locationMap.set(id, desc);
+                	});
+                	var htmlUlEnd = '</ul>';
+                	
+                	htmlResult = htmlUlStart + htmlItems + htmlUlEnd;
+                	
+                	$("#suggesstion-box").show();
+                    $("#suggesstion-box").html(htmlResult);
+                    $("#search-box").css("background", "#FFF");
+            	}
+            	else
+            	{
+            		console.log("error fetching data:" + result.status.message);
+            		$("#search-box").css("background", "#FFF");
+            	}
+            	
+            	
+            	/* <ul id="country-list">
+            	   <li onClick="selectCountry('country_name')"> country_name </li>
+            	</ul> */
+            }
+        });
+    });
+    
+    /* $("#search-box").focusout(function(){
+		$("#suggesstion-box").hide();
+	}); */
+});
+
+function test()
+{
+	alert("test");
+}
+function selectLocation(id) {
+	
+	$("#suggesstion-box").hide();
+	//alert(id);
+	//divSelectedLocation
+	var name = locationMap.get(id);
+	var displayName = (name.length > 8) ? name.substring(0,7)+ "..." : name;
+	console.log(id + " ==> " + displayName);
+	var labelString = '<span title="' +name+ '" class="tag label label-info"><span>' + displayName + '</span><a><i class="fa fa-trash"></i></a></span>'
+						+ '<input type="hidden" name="locationIds" value="'+id+'"/>';
+	$('#divSelectedLocation').append(labelString);
+}
+
+function selectCountry(val) {
+	alert(val);
+    $("#search-box").val(val);
+    $("#suggesstion-box").hide();
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+ <aside class="main-sidebar sidebar-dark-primary"  th:fragment="left-menu-panel">
+    <!-- Brand Logo -->
+    <a href="#" class="brand-link">
+      <img th:src="@{/resources/dist/img/AdminLTELogo.png}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-bold"> CMS Admin</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img th:src="@{/resources/dist/img/user2-160x160.jpg}" class="img-circle elevation-2" alt="User Image">
+        </div>
+        
+        <div class="pull-left info">
+        	<div th:if="${session.userFullName != null}" th:text="${session.userFullName}" style="font-weight: bold; color: silver;"></div>
+        	<div th:if="${session.userPropertyName != null}" th:text="${session.userPropertyName}" style="font-weight: bold; color: silver;"></div>
+		</div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="true" id="left-menus">
+			
+		  <!-- Registrations Start -->
+		  <li class="nav-item has-treeview" sec:authorize="hasAnyAuthority('permission.agent.toto')">
+            <a class="nav-link">
+              <i class="nav-icon fa fa-id-card"></i>
+              <p>
+                Registration
+                <i class="right fa fa-angle-right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              
+              <li class="nav-item" sec:authorize="hasAuthority('permission.agent.toto')">
+                <a class="nav-link">
+                  <i class="fa fa-car nav-icon"></i>
+                  <p>
+                  	Travel & Transport
+                  	<i class="right fa fa-angle-right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview" style="padding-left: 15px;">
+                  
+	              <li class="nav-item" sec:authorize="hasAuthority('permission.agent.toto')">
+	                <a href="/cms/agents/registration/travel/toto" class="nav-link">
+	                  <i class="fa fa-circle-o nav-icon"></i>
+	                  <p>Toto</p>
+	                </a>
+	              </li>
+	              <li class="nav-item" sec:authorize="hasAuthority('permission.agent.driver')">
+	                <a href="/cms/agents/registration/travel/driver" class="nav-link">
+	                  <i class="fa fa-car nav-icon"></i>
+	                  <p>Driver</p>
+	                </a>
+	              </li>
+	              <li class="nav-item" sec:authorize="hasAuthority('permission.agent.driver')">
+	                <a href="/cms/agents/registration/travel/carrent" class="nav-link">
+	                  <i class="fa fa-car nav-icon"></i>
+	                  <p>Car Rent</p>
+	                </a>
+	              </li>
+	            </ul>
+              </li>
+              <li class="nav-item" sec:authorize="hasAuthority('permission.agent.toto')">
+                <a class="nav-link">
+                  <i class="fa fa-university nav-icon"></i>
+                  <p>
+                  	Education & Legal
+                  	<i class="right fa fa-angle-right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview" style="padding-left: 15px;">
+              
+	              <li class="nav-item" sec:authorize="hasAuthority('permission.agent.toto')">
+	                <a href="/cms/agents/registration/edu/tutor" class="nav-link">
+	                  <i class="fa fa-book nav-icon"></i>
+	                  <p>Tutor</p>
+	                </a>
+	              </li>
+	              <li class="nav-item" sec:authorize="hasAuthority('permission.agent.driver')">
+	                <a href="/cms/agents/registration/edu/tc" class="nav-link">
+	                  <i class="fa fa-money nav-icon"></i>
+	                  <p>Tax Consultant/Institutes</p>
+	                </a>
+	              </li>
+	              <li class="nav-item" sec:authorize="hasAuthority('permission.agent.driver')">
+	                <a href="/cms/agents/registration/edu/lawyer" class="nav-link">
+	                  <i class="fa fa-gavel nav-icon"></i>
+	                  <p>Lawyer</p>
+	                </a>
+	              </li>
+	              
+	            </ul>
+              </li>
+              <li class="nav-item" sec:authorize="hasAuthority('permission.agent.toto')">
+                <a class="nav-link">
+                  <i class="fa fa-diamond  nav-icon"></i>
+                  <p>
+                  	Entertainment & Fashion
+                  	<i class="right fa fa-angle-right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview" style="padding-left: 15px;">
+              
+	              <li class="nav-item" sec:authorize="hasAuthority('permission.agent.toto')">
+	                <a href="/cms/agents/registration/edu/makeup" class="nav-link">
+	                  <i class="fa fa-magic nav-icon"></i>
+	                  <p>Makeup Artist</p>
+	                </a>
+	              </li>
+	            </ul>
+              </li>
+              <li class="nav-item" sec:authorize="hasAuthority('permission.agent.toto')">
+                <a class="nav-link">
+                  <i class="fa fa-diamond  nav-icon"></i>
+                  <p>
+                  	Health Care & Emergency
+                  	<i class="right fa fa-angle-right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview" style="padding-left: 15px;">
+              	  <li class="nav-item" sec:authorize="hasAuthority('permission.agent.driver')">
+	                <a href="/cms/agents/registration/travel/ambulance" class="nav-link">
+	                  <i class="fa fa-ambulance nav-icon"></i>
+	                  <p>Ambulance</p>
+	                </a>
+	              </li>
+	              <li class="nav-item" sec:authorize="hasAuthority('permission.agent.toto')">
+	                <a href="/cms/agents/registration/edu/medstore" class="nav-link">
+	                  <i class="fa fa-magic nav-icon"></i>
+	                  <p>Medical Stores</p>
+	                </a>
+	              </li>
+	            </ul>
+              </li>
+              <li class="nav-item" sec:authorize="hasAuthority('permission.agent.toto')">
+                <a class="nav-link">
+                  <i class="fa fa-diamond  nav-icon"></i>
+                  <p>
+                  	Home and Utilities
+                  	<i class="right fa fa-angle-right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview" style="padding-left: 15px;">
+              
+	              <li class="nav-item" sec:authorize="hasAuthority('permission.agent.toto')">
+	                <a href="/cms/agents/registration/hmu/carpenter" class="nav-link">
+	                  <i class="fa fa-magic nav-icon"></i>
+	                  <p>Carpenter</p>
+	                </a>
+	              </li>
+	              <li class="nav-item" sec:authorize="hasAuthority('permission.agent.toto')">
+	                <a href="/cms/agents/registration/hmu/electrician" class="nav-link">
+	                  <i class="fa fa-magic nav-icon"></i>
+	                  <p>Electrician</p>
+	                </a>
+	              </li>
+	              <li class="nav-item" sec:authorize="hasAuthority('permission.agent.toto')">
+	                <a href="/cms/agents/registration/hmu/hcook" class="nav-link">
+	                  <i class="fa fa-magic nav-icon"></i>
+	                  <p>House Cook</p>
+	                </a>
+	              </li>
+	              <li class="nav-item" sec:authorize="hasAuthority('permission.agent.toto')">
+	                <a href="/cms/agents/registration/hmu/hmaid" class="nav-link">
+	                  <i class="fa fa-magic nav-icon"></i>
+	                  <p>House Maid</p>
+	                </a>
+	              </li>
+	              <li class="nav-item" sec:authorize="hasAuthority('permission.agent.toto')">
+	                <a href="/cms/agents/registration/hmu/hmason" class="nav-link">
+	                  <i class="fa fa-magic nav-icon"></i>
+	                  <p>House Mason/Mistiri</p>
+	                </a>
+	              </li>
+	              <li class="nav-item" sec:authorize="hasAuthority('permission.agent.toto')">
+	                <a href="/cms/agents/registration/hmu/mechanics" class="nav-link">
+	                  <i class="fa fa-magic nav-icon"></i>
+	                  <p>Mechanics</p>
+	                </a>
+	              </li>
+	               <li class="nav-item" sec:authorize="hasAuthority('permission.agent.toto')">
+	                <a href="/cms/agents/registration/hmu/plumber" class="nav-link">
+	                  <i class="fa fa-magic nav-icon"></i>
+	                  <p>Plumber</p>
+	                </a>
+	              </li>
+	              
+	              
+	            </ul>
+              </li>
+              
+              
+            </ul>
+          </li>
+          <!-- Registrations  End -->
+          
+          
+          <!-- Payments Start -->
+          <li class="nav-item has-treeview" sec:authorize="hasAnyAuthority('permission.agent.user')">
+            <a class="nav-link">
+              <i class="nav-icon fa fa-product-hunt"></i>
+              <p>
+                Work Data
+                <i class="right fa fa-angle-right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item" sec:authorize="hasAuthority('permission.agent.user')">
+                <a href="/cms/agents/work/submitted" class="nav-link">
+                  <i class="fa fa-tachometer nav-icon"></i>
+                  <p>Submitted Data</p>
+                </a>
+              </li>
+              <li class="nav-item" sec:authorize="hasAuthority('permission.agent.user')">
+                <a href="/cms/agents/work/pending-payments" class="nav-link">
+                  <i class="fa fa-tachometer nav-icon"></i>
+                  <p>Pending Payments</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <!-- Payments End -->
+          
+          <!-- Agent profile start -->
+          <li class="nav-item has-treeview" sec:authorize="hasAnyAuthority('permission.agent.user')">
+            <a class="nav-link">
+              <i class="nav-icon fa fa-product-hunt"></i>
+              <p>
+                Profile
+                <i class="right fa fa-angle-right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              
+              <li class="nav-item" sec:authorize="hasAuthority('permission.agent.user')">
+                <a href="/cms/agents/profile/dashboard" class="nav-link">
+                  <i class="fa fa-tachometer nav-icon"></i>
+                  <p>Dashboard</p>
+                </a>
+              </li>
+              
+              <li class="nav-item" sec:authorize="hasAuthority('permission.agent.user')">
+                <a href="/cms/agents/profile/wallet" class="nav-link">
+                  <i class="fa fa-credit-card nav-icon"></i>
+                  <p>Wallet Recharge</p>
+                </a>
+              </li>
+              
+            </ul>
+          </li>
+          <!-- Agent Profile End -->
+          
+          
+          <!-- User Management Menu Start -->
+		  <li class="nav-item has-treeview" sec:authorize="hasAnyAuthority('permission.admin.approve')">
+            <a class="nav-link">
+              <i class="nav-icon fa fa-users"></i>
+              <p>
+                Approvals
+                <i class="right fa fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              
+              <li class="nav-item" sec:authorize="hasAuthority('permission.admin.approve')">
+                <a href="/cms/approvals/dashboard" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Dashboard</p>
+                </a>
+              </li>
+              
+              <li class="nav-item" sec:authorize="hasAuthority('permission.admin.approve')">
+                <a href="/cms/approvals/agents" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>By Agents</p>
+                </a>
+              </li>
+              
+              <li class="nav-item has-treeview" sec:authorize="hasAuthority('permission.admin.approve')">
+              	
+                <a class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>By Service <i class="right fa fa-angle-left"></i></p>
+                </a>
+                <ul class="nav nav-treeview">
+	              
+	              <li class="nav-item" sec:authorize="hasAuthority('permission.admin.approve')">
+	                <a href="/cms/approvals/ambulace" class="nav-link">
+	                  <i class="fa fa-circle-o nav-icon"></i>
+	                  <p> &nbsp; &nbsp; Ambulance</p>
+	                </a>
+	              </li>
+	              <li class="nav-item" sec:authorize="hasAuthority('permission.admin.approve')">
+	                <a href="/cms/approvals/carpenter" class="nav-link">
+	                  <i class="fa fa-circle-o nav-icon"></i>
+	                  <p> &nbsp; &nbsp; Carpenter</p>
+	                </a>
+	              </li>
+	              <li class="nav-item" sec:authorize="hasAuthority('permission.admin.approve')">
+	                <a href="/cms/approvals/carrent" class="nav-link">
+	                  <i class="fa fa-circle-o nav-icon"></i>
+	                  <p> &nbsp; &nbsp; Car Rent</p>
+	                </a>
+	              </li>
+	              <li class="nav-item" sec:authorize="hasAuthority('permission.admin.approve')">
+	                <a href="/cms/approvals/driver" class="nav-link">
+	                  <i class="fa fa-circle-o nav-icon"></i>
+	                  <p> &nbsp; &nbsp; Drivers</p>
+	                </a>
+	              </li>
+	              <li class="nav-item" sec:authorize="hasAuthority('permission.admin.approve')">
+	                <a href="/cms/approvals/electrician" class="nav-link">
+	                  <i class="fa fa-circle-o nav-icon"></i>
+	                  <p> &nbsp; &nbsp; Electrician</p>
+	                </a>
+	              </li>
+	              <li class="nav-item" sec:authorize="hasAuthority('permission.admin.approve')">
+	                <a href="/cms/approvals/toto" class="nav-link">
+	                  <i class="fa fa-circle-o nav-icon"></i>
+	                  <p> &nbsp; &nbsp; eRikshaw</p>
+	                </a>
+	              </li>
+	              
+	              <li class="nav-item" sec:authorize="hasAuthority('permission.admin.approve')">
+	                <a href="/cms/approvals/hcook" class="nav-link">
+	                  <i class="fa fa-circle-o nav-icon"></i>
+	                  <p> &nbsp; &nbsp; House Cook</p>
+	                </a>
+	              </li>
+	              
+	              <li class="nav-item" sec:authorize="hasAuthority('permission.admin.approve')">
+	                <a href="/cms/approvals/hmaid" class="nav-link">
+	                  <i class="fa fa-circle-o nav-icon"></i>
+	                  <p> &nbsp; &nbsp;House Maid</p>
+	                </a>
+	              </li>
+	              
+	              <li class="nav-item" sec:authorize="hasAuthority('permission.admin.approve')">
+	                <a href="/cms/approvals/homemason" class="nav-link">
+	                  <i class="fa fa-circle-o nav-icon"></i>
+	                  <p> &nbsp; &nbsp; Home Mason</p>
+	                </a>
+	              </li>
+	              
+	              <li class="nav-item" sec:authorize="hasAuthority('permission.admin.approve')">
+	                <a href="/cms/approvals/lawyer" class="nav-link">
+	                  <i class="fa fa-circle-o nav-icon"></i>
+	                  <p> &nbsp; &nbsp; Lawyer</p>
+	                </a>
+	              </li>
+	              <li class="nav-item" sec:authorize="hasAuthority('permission.admin.approve')">
+	                <a href="/cms/approvals/makeup" class="nav-link">
+	                  <i class="fa fa-circle-o nav-icon"></i>
+	                  <p> &nbsp; &nbsp; Makeup</p>
+	                </a>
+	              </li>
+	              
+	              <li class="nav-item" sec:authorize="hasAuthority('permission.admin.approve')">
+	                <a href="/cms/approvals/mechanics" class="nav-link">
+	                  <i class="fa fa-circle-o nav-icon"></i>
+	                  <p> &nbsp; &nbsp; Mechanics</p>
+	                </a>
+	              </li>
+	              
+	              <li class="nav-item" sec:authorize="hasAuthority('permission.admin.approve')">
+	                <a href="/cms/approvals/medstore" class="nav-link">
+	                  <i class="fa fa-circle-o nav-icon"></i>
+	                  <p> &nbsp; &nbsp; Medstore</p>
+	                </a>
+	              </li>
+	              
+	              <li class="nav-item" sec:authorize="hasAuthority('permission.admin.approve')">
+	                <a href="/cms/approvals/plumber" class="nav-link">
+	                  <i class="fa fa-circle-o nav-icon"></i>
+	                  <p> &nbsp; &nbsp; Plumber</p>
+	                </a>
+	              </li>
+	              
+	              <li class="nav-item" sec:authorize="hasAuthority('permission.admin.approve')">
+	                <a href="/cms/approvals/taxconsult" class="nav-link">
+	                  <i class="fa fa-circle-o nav-icon"></i>
+	                  <p> &nbsp; &nbsp; Tax Consultant</p>
+	                </a>
+	              </li>
+	              <li class="nav-item" sec:authorize="hasAuthority('permission.admin.approve')">
+	                <a href="/cms/approvals/tutor" class="nav-link">
+	                  <i class="fa fa-circle-o nav-icon"></i>
+	                  <p> &nbsp; &nbsp; Tutors</p>
+	                </a>
+	              </li>
+	              
+	            </ul>
+              </li>
+            </ul>
+          </li>
+          <!-- User Management Menu End -->
+          
+		  <!-- User Management Menu Start -->
+		  <li class="nav-item has-treeview" sec:authorize="hasAnyAuthority('permission.admin.user')">
+            <a class="nav-link">
+              <i class="nav-icon fa fa-users"></i>
+              <p>
+                User Management
+                <i class="right fa fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              
+              <li class="nav-item" sec:authorize="hasAuthority('permission.admin.user')">
+                <a href="/profile-user-list.html" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>All User</p>
+                </a>
+              </li>
+              
+              <li class="nav-item" sec:authorize="hasAuthority('permission.admin.user')">
+                <a href="/profile-user-add.html" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Add User</p>
+                </a>
+              </li>
+              
+              <li class="nav-item" sec:authorize="hasAuthority('permission.admin.user')">
+                <a href="/profile-role-list.html" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>All Role</p>
+                </a>
+              </li>
+              
+              <li class="nav-item" sec:authorize="hasAuthority('permission.admin.user')">
+                <a href="/profile-role-add.html" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Add Role</p>
+                </a>
+              </li>
+              
+              <li class="nav-item" sec:authorize="hasAuthority('permission.admin.user')">
+                <a href="/profile-permission-list.html" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>All Permission</p>
+                </a>
+              </li>
+              
+            </ul>
+          </li>
+          <!-- User Management Menu End -->
+		  		  
+		  <!-- Change Password Menu Start -->
+		  <li class="nav-item">
+            <a class="nav-link" href="/change-password.html">
+              <i class="nav-icon fa fa-sign-out"></i>
+              <p>change password</p>
+            </a>          
+          </li>		  
+		  <!-- Change Password Menu End -->
+		  
+		  
+		  <!-- Logout Start -->
+          <li class="nav-item has-treeview" >
+            <a class="nav-link" href="/logout">
+              <i class="nav-icon fa fa-sign-out"></i>
+              <p>Logout</p>
+            </a>
+          </li>
+          <!-- Logout End -->
+          
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+</html>
+
+
+

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<title>Add User</title>
+<!-- Head (all meta link scripts go here ) START -->
+<div th:replace="~{fragments/header :: header}"></div>
+<!-- Head (all meta link scripts go here ) END -->
+<!-- ADD THE CLASS sidedar-collapse TO HIDE THE SIDEBAR PRIOR TO LOADING THE SITE -->
+
+<body class="hold-transition skin-blue sidebar-mini">
+<!-- Site wrapper START-->
+<div class="wrapper">
+    <!-- TOP Menu (all meta link scripts go here ) START -->
+    <div th:replace="~{fragments/top-menu :: top-menu}"></div>
+    <!-- TOP Menu (all meta link scripts go here ) END -->
+    <!-- Left side column. contains the sidebar START -->
+    <div th:replace="~{fragments/left-menu-panel :: left-menu-panel}"></div>
+    <!-- Left side column. contains the sidebar END -->
+    <!-- Content Wrapper. Contains page content START -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) START-->
+        <!-- <div th:replace="~{fragments/maincontainheader :: maincontainheader"/>  TODO need to check 21-03-2020 -->
+        <!-- Content Header (Page header) END-->
+
+
+        <!--  ********  PLEASE DO NOT CHANGE ABOVE CODE ********* -->
+
+        <!-- Main content START  -->
+        <!--   ============ YOUR CODE WILL GO HERE =========== START -->
+        <!-- Content Header START -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Add User</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">User Management</a></li>
+                            <li class="breadcrumb-item active">Add User</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- Content Header END -->
+        <section class="content">
+            <div class="container-fluid">
+                <div sec:authorize="!hasAuthority('permission.admin.user')">
+                    <div style="color: #ac2925; text-align: center">
+                        <h4>You don't have permission to this page.</h4>
+                    </div>
+                </div>
+                <div class="row" sec:authorize="hasAuthority('permission.admin.user')">
+                    <div class="col-12">
+                        <div class="box">
+                            <div class="box-header">
+                                <div class="alert alert-success" th:if="${successMessage != null}">
+                                    <strong>Success! </strong>
+                                    <div th:text="${successMessage}"/>
+                                </div>
+                                <div class="alert alert-warning" th:if="${warningMessage != null}">
+                                    <strong>Warning! </strong>
+                                    <div th:text="${warningMessage}"/>
+                                </div>
+                                <div class="alert alert-danger" th:if="${errorMessage != null}">
+                                    <strong>Failure! </strong>
+                                    <div th:text="${errorMessage}"/>
+                                </div>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Enter User Details</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <form role="form" class="form-horizontal" action="#" method="post" id="newUserForm" data-th-action="@{/profile-user-add.html}" th:object="${user}" enctype="multipart/form-data">
+                                
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <!-- dropdown input -->
+                                                <input type="hidden" name="id" class="form-control" id="id" th:field="*{id}"/>
+                                                <div class="form-group">
+                                                    <label for="usertype" class="control-label">User Type</label>
+                                                    <select  name="userType" class="form-control" id="userType" th:field="*{userType}" placeholder="select">
+                                                    	<option th:each="userType : ${allUserTypes}" th:value="${userType}" th:text="${userType}" th:selected="${userType == user.userType}"/>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="username" class="control-label">Username</label>
+                                                    <input type="text" name="username" class="form-control" id="username" th:field="*{username}" placeholder="Username"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="password" class="control-label">Password</label>
+                                                    <input type="password" name="password" id="password" th:field="*{password}"  class="form-control" placeholder="Password"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="confirm" class="control-label">Confirm</label>
+                                                    <input type="password" name="confirm" id="confirm" th:field="*{confirm}" class="form-control" placeholder="Confirm"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="firstName" class="control-label">First Name</label>
+                                                    <input type="text" name="firstName" id="firstName" th:field="*{firstName}" class="form-control" placeholder="First Name"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="lastName" class="control-label">Last Name</label>
+                                                    <input type="text" name="lastName" id="lastName" th:field="*{lastName}" class="form-control" placeholder="Last Name"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="email" class="control-label">Email</label>
+                                                    <input type="text" name="email" id="email" th:field="*{email}" class="form-control" placeholder="Email"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="phone" class="control-label">Phone</label>
+                                                    <input id="phone" type="text" name="phone" th:field="*{phone}" class="form-control" placeholder="Phone">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="email" class="control-label">Pin</label>
+                                                    <input type="text" name="pin" id="pin" th:field="*{pin}" class="form-control" placeholder="pin"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="address" class="control-label">Address</label>
+                                                    <input id="address" type="text" name="address" th:field="*{address}" class="form-control" placeholder="address">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="referedBy" class="control-label">Referred By</label>
+                                                    <input type="text" name="referedBy" id="referedBy" th:field="*{referedBy}" class="form-control" placeholder="Referred By"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                
+                                            </div>
+                                        </div>
+                                        <!-- <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="enabled" class="control-label">Linked Service</label>
+                                                    <select  name="linkedService" class="form-control" id="linkedService" th:field="*{linkedService}" placeholder="select">
+                                                    	<option value=""> Select </option>
+                                                    	<option th:each="linkedService : ${allServices}" th:value="${linkedService}" th:text="${linkedService}" th:selected="${linkedService == user.linkedService}"/>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="propertyId" class="control-label">Property Id</label>
+													<select  name="propertyId" class="form-control" id="propertyId" th:field="*{propertyId}" placeholder="select">
+                                                    	<option value=""> Select </option>
+                                                    	<option th:each="property : ${fnbHotels}" th:value="${property.id}" th:text="${property.name}" th:selected="${property.id == user.propertyId}"/>
+                                                    	<option th:each="property : ${fnbRestaurants}" th:value="${property.id}" th:text="${property.name}" th:selected="${property.id == user.propertyId}"/>
+                                                   	</select>                                               
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                        
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="enabled" class="control-label">Enabled&nbsp;&nbsp;</label>
+                                                    <input id="enabled" type="checkbox" th:field="*{enabled}" name="enabled" data-bootstrap-switch class="form-control" data-off-color="danger" data-on-color="success">
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="usingTfa" class="control-label">2FA &nbsp;&nbsp;</label>
+                                                    <input id="usingTfa" type="checkbox" th:field="*{usingTfa}" name="usingTfa" data-bootstrap-switch class="form-control" data-off-color="danger" data-on-color="success">
+                                                </div>
+                                            </div> -->
+                                            
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label>Roles</label>
+                                                    <select class="duallistbox" size=10 multiple="multiple" th:field="*{roles}">
+                                                        <option th:each="role : ${allRoles}"
+                                                                th:value="${role.name}"
+                                                                th:text="${role.name}"
+                                                                th:selected="${role.isSelected()}"></option>
+                                                    </select>
+                                                </div>
+                                                <!-- /.form-group -->
+                                            </div>
+                                            <!-- /.row -->
+                                        </div>
+                                    </div>
+                                    <!-- /.card-body -->
+                                    <div class="card-footer">
+                                        <button type="button" class="btn btn-danger" name="action" value="cancel"  onClick="javascript:location.href='/profile-user-list.html';">
+                                            Cancel
+                                        </button>
+                                        <button type="submit" class="btn btn-primary pull-right" name="action" value="update">
+                                            Add
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- /.card-->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--   ============ YOUR CODE WILL GO HERE =========== END-->
+        <!-- Main content END  -->
+
+
+        <!--  ********  PLEASE DO NOT CHANGE BELOW CODE ********* -->
+
+    </div>
+    <!-- Content Wrapper. Contains page content END -->
+
+    <!-- ===================##### Main contain goes here END ============================ -->
+
+    <!-- =============================================== -->
+    <!-- Footer START -->
+    <div th:replace="~{fragments/footer :: footer}"></div>
+    <!-- Footer END -->
+    <!-- Add the sidebar's background. This div must be placed immediately after the control sidebar -->
+    <div class="control-sidebar-bg"></div>
+</div>
+<!-- Site wrapper END -->
+<!-- common script START -->
+<div th:replace="~{fragments/common-scripts :: common-scripts}"></div>
+<!-- common script END -->
+<!-- DataTables -->
+<script th:src="@{/resources/js/jquery.dataTables-1.10.12.min.js}"></script>
+<script th:src="@{/resources/js/dataTables.bootstrap-1.10.12.min.js}"></script>
+<script th:src="@{/resources/js/bootstrap-dialog-1.35.4.min.js}"></script>
+<script th:src="@{/resources/js/dataTables.fixedHeader-3.1.3.min.js}"></script>
+<script th:src="@{/resources/js/dataTables.responsive-2.2.1.min.js}"></script>
+<script th:src="@{/resources/js/responsive.bootstrap-2.2.1.min.js}"></script>
+<script th:src="@{/resources/js/jquery.bootstrap-duallistbox.js}"></script>
+<script th:src="@{/resources/js/bootstrap-imageupload.js}"></script>
+
+<script th:inline="javascript">
+
+	/*<![CDATA[*/
+	//var fnbHotels = /*[[${fnbHotels}]]*/ '';
+	//var laundryHotels = /*[[${laundryHotels}]]*/ '';
+	//var boutiqueOutlets = /*[[${boutiqueOutlets}]]*/ '';
+	var user = /*[[${user}]]*/ '';
+	/*]]>*/
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		//handleLinkedServiceChange();
+	});
+    $('.duallistbox').bootstrapDualListbox();
+	
+    $("#newUserForm").on('submit', function() 
+    {
+       var passwd = $("#password").val();
+       var confPass = $("#confirm").val();
+       var userType = $("#userType").val();
+       //var linkedService = $("#linkedService").val();
+       //var propertyId = $("#propertyId").val();
+       var regularExpression  = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+       //alert("userType : " + userType +", \nlinkedService : " + linkedService + ", \npropertyId : " + propertyId);
+       
+       
+       if(!regularExpression.test(passwd)) 
+       {
+           alert("password should have min 8 chars with 1 capital 1 number and 1 special character");
+           return false;
+       }
+       else if(passwd != confPass)
+       {
+    	   alert("Password and confirm password not same");
+           return false;
+       }
+       else if($('[name="rolesPicker"]').val() == '')
+       {
+       		alert('Unable to add an user without any role.');
+        	return false;
+       }
+	});
+    
+    $("input[data-bootstrap-switch]").each(function () {
+        $(this).bootstrapSwitch('state', $(this).prop('checked'));
+    });
+    
+    /* $("#linkedService").change(function(e) {
+    	handleLinkedServiceChange();
+     }); */
+    
+   /* function handleLinkedServiceChange()
+   {   
+	   var service = $("#linkedService").val();
+	   	if(service == "FNB")
+	   	{
+	   		console.log("FNB service selected");
+	   		$("#propertyId").empty();
+	   		$("#propertyId").append(new Option("Select", ""));
+	   		$.each(fnbHotels,function(i, hotel){ 
+		         $("#propertyId").append(new Option(hotel.name, hotel.id));
+		    });
+	   		
+	   	}
+	   	else if(service == "LAUNDRY")
+	   	{
+	   		console.log("LAUNDRY service selected");
+	   		$("#propertyId").empty();
+	   		$("#propertyId").append(new Option("Select", ""));
+	   		$.each(laundryHotels,function(i, hotel){ 
+	   	         $("#propertyId").append(new Option(hotel.name, hotel.id));
+	   	      });   
+	   	}
+	   	else if(service == "BOUTIQUE")
+	   	{
+	   		console.log("BOUTIQUE service selected");
+	   		$("#propertyId").empty();
+	   		$("#propertyId").append(new Option("Select", ""));
+	   		$.each(boutiqueOutlets,function(i, outlet){ 
+	   	         $("#propertyId").append(new Option(outlet.name, outlet.id));
+	   	    });   
+	   	}
+	   	else
+	  	{
+	   		console.log("no service selected");
+	   		$("#propertyId").empty();
+	   		$("#propertyId").append(new Option("Select", ""));
+	  	}
+	   	
+	   	console.log("user.propertyId : " + user.propertyId);
+	   	if(user.propertyId != null){
+			$("#propertyId").val(user.propertyId);
+		}
+   } */
+
+</script>
+</body>
+</html>

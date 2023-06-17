@@ -1,0 +1,24 @@
+.dropdown-menu 
+{
+	width: max-content !important;
+}
+
+.table-images
+{
+	max-width:65px;
+	max-height:65px;
+}
+
+/* Solid border */
+hr.solid {
+  border-top: 3px solid #bbb;
+}
+
+/* Solid border */
+hr.solid-2 {
+  border-top: 2px solid #bbb;
+}
+/* Dotted border */
+hr.dotted {
+  border-top: 2px dotted #bbb;
+}

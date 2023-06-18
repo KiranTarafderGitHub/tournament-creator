@@ -1,0 +1,29 @@
+<<<===== Player/Team ====>>>
+1. Player 
+		- id, name, created on, active
+2. Team 
+		- id, name
+		- List of players
+3. Group
+		- id, name, type
+		- possible types ( player/team )
+		- List of player/teams based on type
+<<<===== Tournamnet staging related ====>>>
+4. Tournament 
+		- id, name, start date , end date
+		- OVERVIEW: an tournamnet will consist of list of stages. Mapped by tournament_id in stage table
+5. Stage 
+		- id, name, type, sequence, tournament_id
+		- possible types ( league, Group, Knockout )
+		- OVERVIEW: a stage will basically consist of list of rounds.  Mapped by stage_id in Round table
+6. Round 
+		- id , name,   dynamic display name, stage_id
+		- will consists of list of matches
+		- OVERVIEW: a Round will basically consist of list of matches. Mapped by round_id in Match table
+7. Match
+		- id, name, round_id, type
+		- possible types ( player/team )
+		- matchDate,teamHome,teamAway,teamHomeScore,teamAwayScore,teamHomePoint,teamAwayPoint,teamHomeBonusPoint,teamAwayBonusPoint,teamHomePenaltyPoint,teamAwayPenaltyPoint;
+		
+<<<===== Tournamnet Points related ====>>>	
+8. Winner setting, points setting	

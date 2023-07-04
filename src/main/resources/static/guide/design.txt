@@ -23,7 +23,29 @@
 7. Match
 		- id, name, round_id, type
 		- possible types ( player/team )
-		- matchDate,teamHome,teamAway,teamHomeScore,teamAwayScore,teamHomePoint,teamAwayPoint,teamHomeBonusPoint,teamAwayBonusPoint,teamHomePenaltyPoint,teamAwayPenaltyPoint;
+		- matchDate,teamHome,teamAway / playerHome,playerAway
 		
 <<<===== Tournamnet Points related ====>>>	
-8. Winner setting, points setting	
+
+8. score setting
+		- name ( eg, Goal, Runs , wickets, Game)
+		- type ( integer, decimal )
+		- is round /Sets
+			- round count
+			- round win condition
+		- template ( example )
+			- Runs/Wicket ( for cricket )
+			- Goals			( for football )
+			- Set1, Set2, Set3 ( for tennis ) 6/0 4/6 4/6
+												
+		- win lose and draw logic
+		
+		
+9. points setting	
+
+10. Winner setting, for example
+		- Most point = win
+		- equal point = draw
+		- least point = lose
+		
+		
